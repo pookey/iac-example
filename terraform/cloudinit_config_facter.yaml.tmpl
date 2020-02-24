@@ -1,0 +1,9 @@
+#cloud-config
+# vim: set syntax=yaml tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab :
+write_files:
+  - content: |
+      nodetype: '${NODETYPE}'
+      puppet_branch: '${PUPPET_BRANCH}'
+    path: '/opt/puppetlabs/facter/facts.d/terraform-facts.yaml'
+    permissions: '0644'
+ 

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd /etc/puppetlabs/code/environments/myenv
+git checkout ${PUPPET_BRANCH}
+git pull
+/opt/puppetlabs/bin/puppet apply -t --environment myenv /etc/puppetlabs/code/environments/myenv/manifests/site.pp

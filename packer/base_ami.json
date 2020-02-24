@@ -1,0 +1,32 @@
+{
+  "builders": [{
+    "type": "amazon-ebs",
+    "ami_name": "pookey-base-{{isotime | clean_resource_name}}",
+    "encrypt_boot": true,
+    "region": "eu-west-1",
+    "instance_type": "t2.micro",
+    "ssh_username": "ec2-user",
+    "source_ami_filter": {
+      "filters": {
+        "virtualization-type": "hvm",
+        "name": "amzn2-ami-hvm-2.0.*-x86_64-gp2",
+        "root-device-type": "ebs"
+      },
+      "owners": ["amazon"],
+      "most_recent": true
+    }
+  }],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "scripts/bootstrap.sh",
+      "destination": "/tmp/bootstrap.sh"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo bash -xe /tmp/bootstrap.sh"
+      ]
+    }
+  ]
+}
